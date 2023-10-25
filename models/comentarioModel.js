@@ -17,8 +17,7 @@ const ComentarioSchema = new Schema({
   },
   enRespuestaA: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Comentario", // Aquí especificas el nombre del modelo al que se hace referencia (Comentario)
-    required: true, // enRespuestaA es un campo obligatorio
+    ref: "Comentario", // Aquí especificas el nombre del modelo al que se hace referencia (Comentario) // si required es true no acepta null
   },
   comentario: {
     type: String,
