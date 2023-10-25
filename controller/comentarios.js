@@ -30,11 +30,14 @@ const getComentarios = async (req, res) => {
   console.log("GET /api/comentarios");
   try {
     const { idApp } = req.query; // idApp -> proyecto en el que trabaja cada grupo
-
+    const { idItem } = req.query; // idItem -> item en el que trabaja cada grupo
     // Define un objeto de filtro basado en el query
     const filtro = {};
     if (idApp) {
       filtro.idApp = idApp;
+    }
+    if (idItem) {
+      filtro.idItem = idItem;
     }
 
     // Realiza la consulta con el filtro

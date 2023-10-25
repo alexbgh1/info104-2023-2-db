@@ -9,7 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-const validHosts = ["http://localhost:3000"];
 
 // Routes
 app.get("/", (req, res) => {
