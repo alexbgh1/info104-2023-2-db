@@ -88,4 +88,34 @@ const deleteComentario = async (req, res) => {
   }
 };
 
-export { getComentario, getComentarios, createComentario, deleteComentario };
+// UPDATE: 1
+const updateComentario = async (req, res) => {
+  console.log("aaa");
+  const comentarioId = req.params.id;
+
+  // Validar si comentarioId es un ObjectId válido
+  if (!mongoose.Types.ObjectId.isValid(comentarioId)) {
+    return res.status(400).json({ message: "ID de comentario no válido" });
+  }
+
+  // Si el comentarioId es un ObjectId válido, buscar el comentario
+  try {
+    const comentarioAntiguo = await Comentario.findById(comentarioId);
+    console.log(comentarioAntiguo);
+    if (!comentarioAntiguo) {
+      return res.status(404).json({ message: "Comentario no encontrado" });
+    }
+
+    // Actualiza el comentario
+    const { comentario: comentarioActualizado } = req.body;
+    comentarioAntiguo.comentario = comentarioActualizado;
+
+    await comentarioAntiguo.save();
+
+    res.json(comentarioAntiguo);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { getComentario, getComentarios, createComentario, deleteComentario, updateComentario };
